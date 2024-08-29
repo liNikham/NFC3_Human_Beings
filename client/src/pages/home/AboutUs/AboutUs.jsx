@@ -21,9 +21,9 @@ const AboutUs = () => {
                     </h1>
                   </div>
                   <p className="px-4 mb-10 text-base leading-7 text-white ">
-                    Petadopy is a revolutionary pet adoption website that
+                    BeyJuban is a revolutionary pet adoption website that
                     celebrates its first-year milestone today. Connecting animal
-                    lovers with furry friends in need, Petadopy has transformed
+                    lovers with furry friends in need, BeyJuban has transformed
                     the adoption process into a seamless and heartwarming
                     experience. The platform boasts a user-friendly interface,
                     allowing prospective pet parents to browse through a diverse
@@ -100,7 +100,7 @@ const AboutUs = () => {
                   <div className="w-full px-4 mb-6 sm:w-1/2 md:w-1/2 lg:mb-6">
                     <div className="p-6 backdrop-blur-xl bg-white/30 rounded-2xl  ">
                       <span className="text-white ">
-                        <h1>icon</h1>
+                        <h1>Icon</h1>
                       </span>
                       <p className="mt-4 mb-2 text-3xl font-bold text-white ">
                         3,590
@@ -111,7 +111,7 @@ const AboutUs = () => {
                   <div className="w-full px-4 mb-6 sm:w-1/2 md:w-1/2 lg:mb-6">
                     <div className="p-6 backdrop-blur-xl bg-white/30 rounded-2xl  ">
                       <span className="text-white ">
-                        <h1>icon</h1>
+                        <h1>Icon</h1>
                       </span>
                       <p className="mt-4 mb-2 text-3xl font-bold text-white ">
                         74
@@ -122,7 +122,7 @@ const AboutUs = () => {
                   <div className="w-full px-4 mb-6 sm:w-1/2 md:w-1/2 lg:mb-6">
                     <div className="p-6 backdrop-blur-xl bg-white/30 rounded-2xl  ">
                       <span className="text-white ">
-                        <h1>icon</h1>
+                        <h1>Icon</h1>
                       </span>
                       <p className="mt-4 mb-2 text-3xl font-bold text-white ">
                         100

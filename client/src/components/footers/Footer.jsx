@@ -68,7 +68,7 @@ const Footer = () => {
               <div className="w-full px-4 mb-11 md:w-1/2 lg:w-4/12 lg:mb-0">
                 <img src={logo} className="w-24 lg:w-60 lg:py-2" alt="" />
                 <p className="text-base font-normal leading-6 lg:w-64 text-white">
-                  Petadopy is a revolutionary pet adoption website that
+                  BeyJuban is a revolutionary pet adoption website that
                   celebrates its first-year milestone today.
                 </p>
               </div>
