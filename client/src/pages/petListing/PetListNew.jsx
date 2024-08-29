@@ -112,7 +112,7 @@ const PetListNew = () => {
               <PetListingCard
                 key={pet._id}
                 data={pet}
-                // ref={index === pets.length - 1 ? lastItemRef : null}
+              // ref={index === pets.length - 1 ? lastItemRef : null}
               />
             ))}
           </div>

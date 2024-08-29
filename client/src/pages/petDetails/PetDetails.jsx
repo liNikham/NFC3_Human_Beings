@@ -12,10 +12,10 @@ import Slider from "../../components/slider/Slider";
 const PetDetails = () => {
   const data = useLoaderData();
   let [isOpen, setIsOpen] = useState(false);
-  const { category, image, location, name, email } = data || {};
+  const { category, image, location, name, email, _id } = data || {};
   const { user } = useAuth();
   const axiosPrivate = useAxiosPrivate();
-  console.log(data);
+  console.log(user);
 
   function closeModal() {
     setIsOpen(false);
@@ -37,16 +37,14 @@ const PetDetails = () => {
   };
 
   const initialValues = {
-    category,
-    name,
-    location,
-    image,
-    email,
-    petIds: data._id,
-    user_name: user?.displayName,
-    user_email: user?.email,
+    petId: user.petId,  // Include the petId
+    userId: user.userId || "",  // Include the userId (assuming it's available from user object)
+    user_name: user?.displayName || "",
+    user_email: user?.user_email || "",
     user_number: "",
     user_address: "",
+    adoptionDate: new Date().toISOString(), // Default to current date
+    additionalInfo: "",  // Optional additional info field
   };
 
   const handleSubmit = async (values, actions) => {
@@ -59,7 +57,7 @@ const PetDetails = () => {
         Swal.fire({
           position: "top-end",
           icon: "success",
-          title: `${data.name} send your adopt request.`,
+          title: `${data.name} has received your adoption request.`,
           showConfirmButton: false,
           timer: 1500,
         });
@@ -75,7 +73,7 @@ const PetDetails = () => {
       <Container>
         <div className="backdrop-blur-xl bg-white/30 text-gray-700 lg:mt-32 mt-20 p-10 rounded-lg">
           <div className="container grid grid-cols-12 mx-auto">
-            <div className="flex flex-col justify-center col-span-12 align-middle bg-no-repeat bg-cover  lg:col-span-6 lg:h-screen">
+            <div className="flex flex-col justify-center col-span-12 align-middle bg-no-repeat bg-cover lg:col-span-6 lg:h-screen">
               {data?.image_url ? (
                 <img
                   className="lg:w-[95%] object-cover w-32 mx-auto rounded-lg lg:h-[600px]"
