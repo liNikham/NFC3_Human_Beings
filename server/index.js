@@ -34,6 +34,7 @@ async function run() {
     const doanationCamp = petadopyDB.collection("doanationCamp");
     const donatesCollection = petadopyDB.collection("donatesCollection");
     const petcategories = petadopyDB.collection("petcategories");
+    const shelterCollection = petadopyDB.collection("shelterCollection");
 
     app.post("/jwt", async (req, res) => {
       try {
@@ -81,6 +82,69 @@ async function run() {
         console.log(error);
       }
     });
+
+    app.post("/api/shelters/register", async (req, res) => {
+      try {
+        const user = req.body;
+        const query = { email: user.email };
+        const isExist = await shelterCollection.findOne(query);
+        if (isExist) {
+          return res.send({ message: "user already exists", insertedId: null });
+        }
+        const result = await shelterCollection.insertOne(user);
+        res.send(result);
+      } catch (error) {
+        console.log(error);
+      }
+    });
+
+    app.post("/api/shelters/login", async (req, res) => {
+      try {
+        const { email, password } = req.body;
+
+        const shelter = await shelterCollection.findOne({ email });
+        if (!shelter) {
+          return res.status(400).json({ message: "Invalid credentials" });
+        }
+        const isMatch = shelter.password === password;
+        if (!isMatch) {
+          return res.status(400).json({ message: "Invalid credentials" });
+        }
+        const token = jwt.sign({ email }, process.env.ACCESS_TOKEN_SECRET, {
+          expiresIn: "1h",
+        });
+        res.json({ token });
+      } catch (error) {
+        res.status(500).json({ message: "Server error" });
+      }
+    });
+
+
+    app.patch("/api/shelters/verify/:id", async (req, res) => {
+      try {
+        const id = req.params.id;
+        const filter = { _id: new ObjectId(id) };
+        const updatedDoc = {
+          $set: {
+            isVerified: true,
+          },
+        };
+        const result = await shelterCollection.updateOne(filter, updatedDoc);
+        res.send(result);
+      } catch (error) {
+        console.log(error);
+      }
+    });
+
+    app.get("/api/shelters", async (req, res) => {
+      try {
+        const result = await shelterCollection.find().toArray();
+        res.send(result);
+      } catch (error) {
+        console.log(error);
+      }
+    });
+
     app.post("/api/users", async (req, res) => {
       try {
         const user = req.body;

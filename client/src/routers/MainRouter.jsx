@@ -33,6 +33,8 @@ import MyAddPetUpdate from "../pages/dashboard/user/myAddPet/MyAddPetUpdate";
 import Blog from "../pages/blog/Blog";
 import VideoCall from "../components/VideoCall/VideoCall"
 import Quiz from '../components/PetAdoptionQuiz/PetAdoptionQuiz'
+import AdminVerify from "../pages/dashboard/admin/ShelterVerify/ShelterVerify";
+import ShelterRegistration from "../components/Shelters/ShelterRegistration";
 
 const MainRouter = createBrowserRouter([
   {
@@ -99,6 +101,10 @@ const MainRouter = createBrowserRouter([
     element: <Registration></Registration>,
   },
   {
+    path: "/shelter-registration",
+    element: <ShelterRegistration />,
+  },
+  {
     path: "/quiz",
     element: <PrivateRoute><Quiz /></PrivateRoute>,
   },
@@ -159,6 +165,14 @@ const MainRouter = createBrowserRouter([
         element: (
           <PrivateRoute>
             <AddPet></AddPet>,
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "verifyShelter",
+        element: (
+          <PrivateRoute>
+            <AdminVerify />
           </PrivateRoute>
         ),
       },

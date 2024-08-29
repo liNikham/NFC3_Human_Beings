@@ -215,11 +215,10 @@ const AdoptionReq = () => {
               <button
                 key={pageNumber}
                 onClick={() => setPage(pageNumber)}
-                className={`${
-                  pageNumber === page
+                className={`${pageNumber === page
                     ? "bg-indigo-100 px-5 py-2 text-xl text-indigo-800"
                     : "bg-indigo-600 px-5 py-2 text-xl"
-                }`}
+                  }`}
               >
                 {pageNumber}
               </button>
