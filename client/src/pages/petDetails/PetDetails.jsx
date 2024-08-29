@@ -27,11 +27,11 @@ const PetDetails = () => {
 
   const validateForm = (values) => {
     const errors = {};
-    if (!values.number) {
-      errors.number = "Phone Number is required";
+    if (!values.user_number) {
+      errors.user_number = "Phone Number is required";
     }
-    if (!values.address) {
-      errors.address = "Address is required";
+    if (!values.user_address) {
+      errors.user_address = "Address is required";
     }
     return errors;
   };
@@ -63,9 +63,10 @@ const PetDetails = () => {
           showConfirmButton: false,
           timer: 1500,
         });
+        closeModal(); // Close the modal after successful submission
       }
     } catch (error) {
-      console.error("Error submitting adoption request:", error);
+      console.error("Error submitting form", error);
     }
   };
 
@@ -227,7 +228,7 @@ const PetDetails = () => {
                               placeholder="your address"
                             />
                             <ErrorMessage
-                              name="address"
+                              name="user_address"
                               component="div"
                               className="text-red-500"
                             />
