@@ -30,6 +30,8 @@ import MyDonation from "../pages/dashboard/user/myDonation/MyDonation";
 import VetDoctor from "../pages/vetDoctor/VetDoctor";
 import MyAddPetList from "../pages/dashboard/user/myAddPet/MyAddPetList";
 import MyAddPetUpdate from "../pages/dashboard/user/myAddPet/MyAddPetUpdate";
+import VideoCall from "../components/VideoCall/VideoCall";
+
 
 const MainRouter = createBrowserRouter([
   {
@@ -54,7 +56,7 @@ const MainRouter = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          // fetch(`https://petadopy-backend.vercel.app/api/petList/${params.id}`),
+          // fetch(https://petadopy-backend.vercel.app/api/petList/${params.id}),
           fetch(`http://localhost:5000/api/petList/${params.id}`),
       },
       {
@@ -75,8 +77,7 @@ const MainRouter = createBrowserRouter([
         loader: async ({ params }) => {
           try {
             const response = await fetch(
-              `https://petadopy-backend.vercel.app/api/allDonationCamp/${params.id}`
-              // `http://localhost:5000/api/allDonationCamp/${params.id}`
+              `http://localhost:5000/api/allDonationCamp/${params.id}`
             );
             const data = await response.json();
             return data;
@@ -84,6 +85,10 @@ const MainRouter = createBrowserRouter([
             console.error("Error fetching data:", error);
           }
         },
+      },
+      {
+        path: "/video-call",
+        element: <VideoCall></VideoCall>,
       },
     ],
   },
@@ -202,8 +207,8 @@ const MainRouter = createBrowserRouter([
         loader: async ({ params }) => {
           try {
             const response = await fetch(
-              `https://petadopy-backend.vercel.app/api/allDonationCamp/${params.id}`
-              // `http://localhost:5000/api/allDonationCamp/${params.id}`
+              // `https://petadopy-backend.vercel.app/api/allDonationCamp/${params.id}`
+              `http://localhost:5000/api/allDonationCamp/${params.id}`
             );
             const data = await response.json();
             return data;
