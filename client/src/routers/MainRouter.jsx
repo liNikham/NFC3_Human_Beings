@@ -31,6 +31,7 @@ import VetDoctor from "../pages/vetDoctor/VetDoctor";
 import MyAddPetList from "../pages/dashboard/user/myAddPet/MyAddPetList";
 import MyAddPetUpdate from "../pages/dashboard/user/myAddPet/MyAddPetUpdate";
 import VideoCall from "../components/VideoCall/VideoCall";
+import Blog from "../pages/blog/Blog";
 
 
 const MainRouter = createBrowserRouter([
@@ -66,6 +67,10 @@ const MainRouter = createBrowserRouter([
       {
         path: "/vetDoctor",
         element: <VetDoctor />,
+      },
+      {
+        path: "/blog",
+        element: <Blog/>,
       },
       {
         path: "/donation/:id",
@@ -149,6 +154,14 @@ const MainRouter = createBrowserRouter([
         element: (
           <PrivateRoute>
             <AddPet></AddPet>,
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "blog",
+        element: (
+          <PrivateRoute>
+            <Blog></Blog>,
           </PrivateRoute>
         ),
       },

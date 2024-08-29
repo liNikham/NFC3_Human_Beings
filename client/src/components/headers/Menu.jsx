@@ -28,6 +28,12 @@ const Menu = () => {
           Pet Doctor
         </NavLink>
         <NavLink
+          to={"/blog"}
+          className="z-50 px-3 py-1 rounded-md whitespace-nowrap"
+        >
+          Pet Blogs
+        </NavLink>
+        <NavLink
           to={"/donation"}
           className="z-50 px-3 py-1 rounded-md whitespace-nowrap"
         >
