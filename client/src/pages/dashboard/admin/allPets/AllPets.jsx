@@ -284,8 +284,9 @@ const AllPets = () => {
                   table.getRowModel().rows.map((row, i) => (
                     <tr
                       key={row.id}
-                      className={`${i % 2 === 0 ? "bg-gray-100" : "bg-gray-50"
-                        }`}
+                      className={`${
+                        i % 2 === 0 ? "bg-gray-100" : "bg-gray-50"
+                      }`}
                     >
                       {row.getVisibleCells().map((cell) => (
                         <td key={cell.id} className="px-3.5 py-2">

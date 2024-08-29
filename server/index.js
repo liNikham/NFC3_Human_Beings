@@ -1,4 +1,5 @@
-
+// tahidcse
+// Z730isvK91QgQgG0
 const express = require("express");
 const app = express();
 require("dotenv").config();
@@ -10,7 +11,7 @@ const port = process.env.PORT || 5000;
 
 const corsOptions = {
   origin: ["http://localhost:5173", "http://localhost:5174"],
-  // origin: ["https://petConnect.web.app", "https://petConnect.firebaseapp.com"],
+  // origin: ["https://petadopy.web.app", "https://petadopy.firebaseapp.com"],
   credentials: true,
   optionSuccessStatus: 200,
 };
@@ -26,13 +27,13 @@ const client = new MongoClient(process.env.DB_URI, {
 });
 async function run() {
   try {
-    const petConnectDB = client.db("petConnectDB");
-    const usersCollection = petConnectDB.collection("usersCollection");
-    const adoptCollection = petConnectDB.collection("adoptCollection");
-    const petlists = petConnectDB.collection("petlists");
-    const doanationCamp = petConnectDB.collection("doanationCamp");
-    const donatesCollection = petConnectDB.collection("donatesCollection");
-    const petcategories = petConnectDB.collection("petcategories");
+    const petadopyDB = client.db("petadopyDB");
+    const usersCollection = petadopyDB.collection("usersCollection");
+    const adoptCollection = petadopyDB.collection("adoptCollection");
+    const petlists = petadopyDB.collection("petlists");
+    const doanationCamp = petadopyDB.collection("doanationCamp");
+    const donatesCollection = petadopyDB.collection("donatesCollection");
+    const petcategories = petadopyDB.collection("petcategories");
 
     app.post("/jwt", async (req, res) => {
       try {
@@ -644,9 +645,9 @@ async function run() {
 run().catch(console.dir);
 
 app.get("/", (req, res) => {
-  res.send("Hello from PetConnect Server..");
+  res.send("Hello from Petadopy Server..");
 });
 
 app.listen(port, () => {
-  console.log(`PetConnect is running on port ${port}`);
+  console.log(`Petadopy is running on port ${port}`);
 });

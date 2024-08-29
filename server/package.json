@@ -11,7 +11,7 @@
     "react-slider-image-js": "^1.1.0",
     "stripe": "^14.7.0"
   },
-  "name": "petconnect-backend",
+  "name": "petadopy-backend",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -23,4 +23,3 @@
   "license": "ISC",
   "description": ""
 }
-
