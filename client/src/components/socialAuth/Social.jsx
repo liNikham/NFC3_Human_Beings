@@ -22,6 +22,7 @@ const Social = () => {
           email: result?.user?.email,
           name: result?.user?.displayName,
         };
+        console.log(userInfo);
         axiosUser.post("/api/users", userInfo);
         Swal.fire("Sign In seccessfully");
         navigate(location.state ? location.state : "/");

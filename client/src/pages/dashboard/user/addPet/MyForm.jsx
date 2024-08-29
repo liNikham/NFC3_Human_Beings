@@ -40,6 +40,7 @@ const MyForm = () => {
           })
         );
         values.image_urls = uploadedImageUrls;
+        console.log(values);
         const res = await axiosPrivate.post("/api/petList", values);
         if (res.data.acknowledged) {
           Swal.fire({

@@ -11,11 +11,16 @@ import Slider from "../../components/slider/Slider";
 
 const PetDetails = () => {
   const data = useLoaderData();
+  console.log(data, "data");
   let [isOpen, setIsOpen] = useState(false);
   const { category, image, location, name, email, _id } = data || {};
   const { user } = useAuth();
   const axiosPrivate = useAxiosPrivate();
-  console.log(user);
+  if (!user) {
+    return <div>Loading...</div>;  // Or some kind of loading indicator
+  }
+  console.log("hello");
+  console.log(user , "user information");
 
   function closeModal() {
     setIsOpen(false);
@@ -35,19 +40,23 @@ const PetDetails = () => {
     }
     return errors;
   };
-
+  
   const initialValues = {
-    petId: user.petId,  // Include the petId
-    userId: user.userId || "",  // Include the userId (assuming it's available from user object)
-    user_name: user?.displayName || "",
-    user_email: user?.user_email || "",
+    petId: user.petId || "",  // Ensure defaults are in place
+    userId: user.userId || "",
+    email: data.email || "",
+    user_name: user.displayName || "",
+    user_email: user.email || "",
     user_number: "",
     user_address: "",
-    adoptionDate: new Date().toISOString(), // Default to current date
-    additionalInfo: "",  // Optional additional info field
+    adoptionDate: new Date().toISOString(), 
+    additionalInfo: "",
   };
 
   const handleSubmit = async (values, actions) => {
+    console.log(user, "user information  2");
+    console.log("Submitting form", data);
+    console.log("Submitting form", initialValues);
     console.log(values);
     actions.setSubmitting(false);
     try {

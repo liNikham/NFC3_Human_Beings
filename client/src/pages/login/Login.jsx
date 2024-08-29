@@ -42,6 +42,7 @@ const Login = () => {
         name: "User",
         email,
       };
+      
       signIn(email, password).then((result) => {
         console.log(result);
         try {

@@ -34,7 +34,7 @@ async function run() {
     const doanationCamp = petadopyDB.collection("doanationCamp");
     const donatesCollection = petadopyDB.collection("donatesCollection");
     const petcategories = petadopyDB.collection("petcategories");
-
+     
     app.post("/jwt", async (req, res) => {
       try {
         const user = req.body;
@@ -82,9 +82,11 @@ async function run() {
       }
     });
     app.post("/api/users", async (req, res) => {
+      console.log(req.body);
       try {
         const user = req.body;
         const query = { email: user.email };
+        console.log(query);
         const isExist = await usersCollection.findOne(query);
         if (isExist) {
           return res.send({ message: "user already exists", insertedId: null });
@@ -247,6 +249,7 @@ async function run() {
     app.post("/api/adopt", verifyToken, async (req, res) => {
       try {
         const data = req.body;
+        console.log(req.body);
         const result = await adoptCollection.insertOne(data);
         res.send(result);
       } catch (error) {
@@ -256,7 +259,7 @@ async function run() {
     app.get("/api/adopt", verifyToken, async (req, res) => {
       try {
         const query = { email: req.query.email };
-        // console.log(query);
+        console.log(query);
         const page = Number(req.query.page);
         const limit = Number(req.query.limit);
         const skip = (page - 1) * limit;
@@ -359,7 +362,9 @@ async function run() {
     app.post("/api/petList", async (req, res) => {
       try {
         const data = req.body;
+        console.log(data)
         const result = await petlists.insertOne(data);
+        console.log(result);
         res.send(result);
       } catch (error) {
         console.log(error);
