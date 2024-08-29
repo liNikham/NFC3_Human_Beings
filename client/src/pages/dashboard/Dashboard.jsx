@@ -19,6 +19,7 @@ import { PiDogFill } from "react-icons/pi";
 import { FaUsers } from "react-icons/fa";
 import { GiTakeMyMoney } from "react-icons/gi";
 import logo from "../../assets/petadopyWhite.png";
+import { BsGraphDownArrow } from "react-icons/bs";
 const Dashboard = () => {
   const [isAdmin] = useAdmin();
   const location = useLocation();
@@ -179,6 +180,15 @@ const Dashboard = () => {
                       >
                         <GiPayMoney className="text-xl" />
                         My Donation
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        to={"Reports"}
+                        className="flex gap-2 lg:px-2 lg:py-1 lg:my-1 p-[6px] items-center hover:bg-indigo-200 rounded-lg hover:text-indigo-950"
+                      >
+                        <BsGraphDownArrow className="text-xl" />
+                        Reports and Analytics
                       </NavLink>
                     </li>
 

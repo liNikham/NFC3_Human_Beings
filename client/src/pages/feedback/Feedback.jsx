@@ -1,19 +1,20 @@
 import React, { useState } from 'react';
 import Container from '../../components/shared/Container';
+import axios from 'axios';
 
 function Feedback() {
     const [comments, setComments] = useState('');
     const [rating, setRating] = useState(0);
 
-    const handleSubmit = async(e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const feedbackData = {
             comments,
             rating,
         };
-        if(rating){
+        if (rating) {
             try {
-                await axios.post('https://your-api-endpoint.com/feedback', feedbackData);
+                await axios.post('http://localhost:5000/api/feedback', feedbackData);
                 alert('Feedback submitted successfully!');
             } catch (error) {
                 console.error('Error submitting feedback:', error);
