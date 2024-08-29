@@ -35,6 +35,7 @@ import VideoCall from "../components/VideoCall/VideoCall"
 import Quiz from '../components/PetAdoptionQuiz/PetAdoptionQuiz'
 import AdminVerify from "../pages/dashboard/admin/ShelterVerify/ShelterVerify";
 import ShelterRegistration from "../components/Shelters/ShelterRegistration";
+import Feedback from "../pages/feedback/Feedback";
 
 const MainRouter = createBrowserRouter([
   {
@@ -90,6 +91,14 @@ const MainRouter = createBrowserRouter([
           }
         },
       },
+      {
+        path: "/feedback",
+        element: (
+          <PrivateRoute>
+            <Feedback></Feedback>
+          </PrivateRoute>
+        )
+      }
     ],
   },
   {

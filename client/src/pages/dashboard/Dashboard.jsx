@@ -8,7 +8,7 @@ import DashBoardHeader from "../../components/headers/DashBoardHeader";
 import { FaSignOutAlt } from "react-icons/fa";
 import { IoCreate } from "react-icons/io5";
 import { GrUploadOption } from "react-icons/gr";
-import { MdOutlinePets } from "react-icons/md";
+import { MdOutlinePets, MdVerifiedUser } from "react-icons/md";
 import { BiSolidDonateHeart } from "react-icons/bi";
 import { FaDonate } from "react-icons/fa";
 import { SiDatadog } from "react-icons/si";
@@ -72,9 +72,8 @@ const Dashboard = () => {
 
         {showSidebar && (
           <div
-            className={`fixed top-0 left-0  inset-y-0 z-50 flex-shrink-0 w-64 ease-in-out duration-500 overflow-y-auto bg-indigo-950 text-white ${
-              !showSidebar ? "-translate-x-full" : "translate-x-0 "
-            }`}
+            className={`fixed top-0 left-0  inset-y-0 z-50 flex-shrink-0 w-64 ease-in-out duration-500 overflow-y-auto bg-indigo-950 text-white ${!showSidebar ? "-translate-x-full" : "translate-x-0 "
+              }`}
           >
             <div className="py-3 px-5  top-0 left-0 h-screen bg-indigo-950  sidebar-content">
               <div className="flex justify-between items-center">
@@ -137,6 +136,13 @@ const Dashboard = () => {
                       >
                         <GrUploadOption className="text-xl" />
                         Adoption Request
+                      </NavLink>
+                      <NavLink
+                        to={"verifyShelter"}
+                        className="flex gap-2 lg:px-2 lg:py-1 lg:my-1 p-[6px] items-center hover:bg-indigo-200 rounded-lg hover:text-indigo-950"
+                      >
+                        <MdVerifiedUser className="text-xl" />
+                        Verify Shelter
                       </NavLink>
                     </li>
                     <li>

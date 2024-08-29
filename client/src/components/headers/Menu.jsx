@@ -25,13 +25,19 @@ const Menu = () => {
           to={"/vetDoctor"}
           className="z-50 px-3 py-1 rounded-md whitespace-nowrap"
         >
-          Vet Doctor
+          Pet Doctor
         </NavLink>
         <NavLink
           to={"/donation"}
           className="z-50 px-3 py-1 rounded-md whitespace-nowrap"
         >
           Donation
+        </NavLink>
+        <NavLink
+          to={"/feedback"}
+          className="z-50 px-3 py-1 rounded-md whitespace-nowrap"
+        >
+          Feedback
         </NavLink>
         {user?.email ? (
           <MenuDrop />

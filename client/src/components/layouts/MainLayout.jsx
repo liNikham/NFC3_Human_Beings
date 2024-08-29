@@ -10,70 +10,23 @@ const MainLayout = () => {
   return (
     //
     <div
-      className="font-poppins -mt-28 gradient-background"
+      className="font-poppins min-h-screen flex flex-col gradient-background"
       style={{
         backgroundImage: `url(${bgImg})`,
         backgroundColor: "#0e003f",
-        // background:
-        //   "linear-gradient(90deg, hsla(328, 75%, 45%, 1) 0%, hsla(269, 85%, 41%, 1) 100%)",
-        // backgroundSize: "cover",
-        // backgroundSize: "contain",
-        // width: "100%",
         backgroundPosition: "center",
-        position: "relative",
-        height: "100%",
         backgroundRepeat: "no-repeat",
       }}
     >
-      {/* <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span> */}
-      <div
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          // backgroundColor: "rgba(0, 0, 0, 0.7)",
-          backgroundColor: "rgba(0, 0, 0, 0.9)",
-        }}
-      ></div>
-
-      <div className="font-poppins relative z-50">
-        <NewNab />
-        <div className="pt-28">
+      <NewNab />
+      <div className="flex-grow pt-16"> {/* Add padding-top to account for Navbar height */}
+        <div className="flex items-center justify-center h-full">
           <Outlet />
         </div>
-        <Footer />
       </div>
+      <Footer />
     </div>
-    // <>
-    //   <div className="font-poppins">
-    //     <NewNab />
-    //     <div>
-    //       <Outlet />
-    //     </div>
-    //     <Footer />
-    //   </div>
-    // </>
+
   );
 };
 

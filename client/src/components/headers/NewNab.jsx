@@ -31,65 +31,39 @@ const NewNab = () => {
   }, []);
 
   return (
-    <div>
-      <Container newClass={"fixed top-0 left-0 right-0 my-2 z-50"}>
-        <div className="relative ">
-          {/* <img
-            src={navBng}
-            width="100%"
-            className="max-w-full lg:h-auto md:h-20 h-14"
-            alt=""
-          /> */}
-          {scrollPosition > 0 && (
-            <div
-              className="lg:-mt-[26px] -mt-20 z-10"
-              style={{
-                position: "fixed",
-                left: `calc(${scrollPosition / scrollFactor}%)`,
-                transition: "left 0.3s ease",
-              }}
-            >
-              <PatAnime />
-            </div>
-          )}
-          <div className="absolute top-1 left-0 w-[98%] lg:ml-3 lg:mr-3  rounded-full">
-            <div
-              className="max-w-7xl mx-auto flex items-center justify-between lg:px-10 px-2 "
-              style={{ position: "relative" }}
-            >
-              <div className="flex-shrink-0 font-bold tracking-wider z-50">
-                <img src={logo} className="lg:w-40 md:w-28 w-28 pl-2" alt="" />
-              </div>
-
-              <div className="hidden md:block z-50">
-                <Menu />
-              </div>
-
-              <button
-                type="button"
-                className="md:hidden inline-flex items-center justify-center p-2 rounded-md focus:outline-none transition delay-300 duration-300 ease-in-out text-white"
-                onClick={() => setShowMobileMenu(!showMobileMenu)}
-              >
-                {!showMobileMenu ? (
-                  <CgMenuRightAlt className="text-3xl transition-transform duration-300 ease-in-out" />
-                ) : (
-                  <RxCross2 className="text-3xl transition-transform duration-300 ease-in-out" />
-                )}
-              </button>
-            </div>
-            <div
-              className="md:hidden absolute backdrop-blur-3xl bg-white/30 rounded-lg w-full delay-300 duration-500 mt-1"
-              style={{
-                transition: "opacity 0.3s ease-in-out",
-                opacity: showMobileMenu ? 1 : 0,
-              }}
-            >
-              {showMobileMenu && <Menu />}
-            </div>
+    <div className="bg-black shadow-md sticky top-0 left-0 right-0 z-50">
+      <Container newClass={"z-50"}>
+        <div className="max-w-7xl mx-auto flex items-center justify-between px-4 py-2">
+          <div className="flex-shrink-0 font-bold tracking-wider">
+            <img src={logo} className="w-32" alt="Logo" />
           </div>
+
+          <div className="hidden md:block">
+            <Menu />
+          </div>
+
+          <button
+            type="button"
+            className="md:hidden p-2 rounded-md text-gray-700"
+            onClick={() => setShowMobileMenu(!showMobileMenu)}
+          >
+            {!showMobileMenu ? (
+              <CgMenuRightAlt className="text-3xl" />
+            ) : (
+              <RxCross2 className="text-3xl" />
+            )}
+          </button>
         </div>
+        {showMobileMenu && (
+          <div className="md:hidden bg-white shadow-md rounded-lg mt-2">
+            <Menu />
+          </div>
+        )}
       </Container>
     </div>
+
+
+
   );
 };
 
