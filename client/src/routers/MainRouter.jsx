@@ -30,6 +30,9 @@ import MyDonation from "../pages/dashboard/user/myDonation/MyDonation";
 import VetDoctor from "../pages/vetDoctor/VetDoctor";
 import MyAddPetList from "../pages/dashboard/user/myAddPet/MyAddPetList";
 import MyAddPetUpdate from "../pages/dashboard/user/myAddPet/MyAddPetUpdate";
+import Blog from "../pages/blog/Blog";
+import VideoCall from "../components/VideoCall/VideoCall"
+import Quiz from '../components/PetAdoptionQuiz/PetAdoptionQuiz'
 
 const MainRouter = createBrowserRouter([
   {
@@ -75,8 +78,8 @@ const MainRouter = createBrowserRouter([
         loader: async ({ params }) => {
           try {
             const response = await fetch(
-              `https://petadopy-backend.vercel.app/api/allDonationCamp/${params.id}`
-              // `http://localhost:5000/api/allDonationCamp/${params.id}`
+              // `https://petadopy-backend.vercel.app/api/allDonationCamp/${params.id}`
+              `http://localhost:5000/api/allDonationCamp/${params.id}`
             );
             const data = await response.json();
             return data;
@@ -94,6 +97,18 @@ const MainRouter = createBrowserRouter([
   {
     path: "/registration",
     element: <Registration></Registration>,
+  },
+  {
+    path: "/quiz",
+    element: <PrivateRoute><Quiz /></PrivateRoute>,
+  },
+  {
+    path: "/blog",
+    element: <PrivateRoute><Blog /></PrivateRoute>,
+  },
+  {
+    path: "/videocall",
+    element: <PrivateRoute><VideoCall /></PrivateRoute>,
   },
   {
     path: "/dashboard",
@@ -202,8 +217,8 @@ const MainRouter = createBrowserRouter([
         loader: async ({ params }) => {
           try {
             const response = await fetch(
-              `https://petadopy-backend.vercel.app/api/allDonationCamp/${params.id}`
-              // `http://localhost:5000/api/allDonationCamp/${params.id}`
+              // `https://petadopy-backend.vercel.app/api/allDonationCamp/${params.id}`
+              `http://localhost:5000/api/allDonationCamp/${params.id}`
             );
             const data = await response.json();
             return data;

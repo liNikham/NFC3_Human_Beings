@@ -1,26 +1,29 @@
-/* eslint-disable no-unused-vars */
 import React, { Fragment, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import Container from "../../components/shared/Container";
 import { Dialog, Transition } from "@headlessui/react";
-// import { Formik, Field, Form, ErrorMessage } from "formik";
 import Donate from "./Donate/Donate";
+
 const DonationDetails = () => {
   const data = useLoaderData();
   let [isOpen, setIsOpen] = useState(false);
   const [amount, setAmount] = useState(null);
+
   function closeModal() {
     setIsOpen(false);
   }
+
   function openModal() {
     setIsOpen(true);
   }
+
   const min = 1;
   const max = data.amount;
   const handleChange = (event) => {
     const value = Math.max(min, Math.min(max, Number(event.target.value)));
     setAmount(value);
   };
+
   return (
     <div>
       <Container>
@@ -54,7 +57,7 @@ const DonationDetails = () => {
                     <Transition appear show={isOpen} as={Fragment}>
                       <Dialog
                         as="div"
-                        className="relative z-10"
+                        className="relative z-50" // Adjust z-index here
                         onClose={closeModal}
                       >
                         <Transition.Child
@@ -80,12 +83,12 @@ const DonationDetails = () => {
                               leaveFrom="opacity-100 scale-100"
                               leaveTo="opacity-0 scale-95"
                             >
-                              <Dialog.Panel className="w-full max-w-4xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                              <Dialog.Panel className="w-full max-w-4xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all z-50">
                                 <div className="p-8 rounded border border-gray-200">
                                   <h1 className="font-medium text-3xl">
                                     Be{" "}
                                     <span className="text-indigo-600">
-                                      {data.name + `'s`}
+                                      {data.name + 's'}
                                     </span>{" "}
                                     friend
                                   </h1>
@@ -103,14 +106,8 @@ const DonationDetails = () => {
                                         </label>
                                         <input
                                           type="number"
-                                          // min="1"
-                                          // max="10"
                                           onChange={handleChange}
                                           value={amount}
-                                          // onChange={(e) =>
-                                          //   setAmount(e.target.value)
-                                          // }
-
                                           name="donate_amount"
                                           id="number"
                                           className="bg-gray-100 border border-gray-200 rounded py-1 px-3 block focus:ring-blue-500 focus:border-blue-500 text-gray-700 w-full"
