@@ -8,6 +8,32 @@ const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const jwt = require("jsonwebtoken");
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const port = process.env.PORT || 5000;
+const Question = require("./src/models/questions");
+const crypto = require('crypto');
+
+function generateUniqueToken() {
+  return crypto.randomBytes(20).toString('hex');
+}
+
+const nodemailer = require('nodemailer');
+
+async function sendNotification(email, message) {
+  let transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'nikhil.212708111@vcet.edu.in',
+      pass: 'lhnxhycouydbugsi',
+    },
+  });
+
+  await transporter.sendMail({
+    from: 'nikhil.212708111@vcet.edu.in',
+    to: email,
+    subject: 'Pet Adoption Questionnaire',
+    text: message,
+  });
+}
+
 
 const corsOptions = {
   origin: ["http://localhost:5173", "http://localhost:5174"],
@@ -36,7 +62,7 @@ async function run() {
     const petcategories = petadopyDB.collection("petcategories");
     const shelterCollection = petadopyDB.collection("shelterCollection");
 
-    
+
     app.post("/jwt", async (req, res) => {
       try {
         const user = req.body;
@@ -342,6 +368,105 @@ async function run() {
         console.log(error);
       }
     });
+    app.get("/api/adopt/status", verifyToken, async (req, res) => {
+      try {
+        const query = { user_email: req.query.email };
+        const applications = await adoptCollection.find(query).toArray();
+        res.send(applications);
+      } catch (error) {
+        console.log(error);
+        res.status(500).send({ message: 'Something went wrong' });
+      }
+    });
+    
+    app.get('/api/questionnaire', async (req, res) => {
+      try {
+        const token = req.query.token;
+        // Verify the token if needed
+        const questions = await Question.find();
+        console.log(questions);
+        res.status(200).json(questions);
+      } catch (error) {
+        res.status(500).json({ error: 'Failed to fetch questionnaire.' });
+      }
+    });
+    
+    // server.js or app.js
+    app.post('/api/submit-responses', async (req, res) => {
+      try {
+        const { responses, token } = req.body;
+        // Verify the token if needed
+        const questions = await Question.find();
+        let result = true;
+    
+        questions.forEach(question => {
+          if (question.strict && responses[question._id] !== question.correctAnswer) {
+            result = false;
+          }
+        });
+    
+        // Update user status based on result
+        await User.updateOne({ questionnaireToken: token }, { questionnaireStatus: result ? 'Passed' : 'Failed' });
+    
+        res.status(200).json({ message: 'Responses submitted successfully.' });
+      } catch (error) {
+        res.status(500).json({ error: 'Failed to submit responses.' });
+      }
+    });
+    
+
+
+// Express.js route for handling application acceptance
+
+// Express.js route for handling application acceptance
+app.patch('/api/adopt/:id', async (req, res) => {
+  const { id } = req.params;
+  const { email } = req.body; // Pass the email from the client
+
+  try {
+    // Update the application status using the _id field
+    const application = await adoptCollection.findOne({ _id: new ObjectId(id) });
+    
+    if (!application) {
+      return res.status(404).send({ message: 'Application not found' });
+    }
+
+    // Update the status of the application
+    const result = await adoptCollection.updateOne(
+      { _id: new ObjectId(id) },
+      { $set: { status: 'Accepted' } }
+    );
+
+    if (result.matchedCount === 0) {
+      return res.status(404).send({ message: 'Failed to update the application' });
+    }
+
+    // Generate a unique token for the questionnaire
+    const token = generateUniqueToken(); // Implement this function
+    const questionnaireLink = `http://localhost:5173/quiz?token=${token}`;
+
+    // Store the token with the user or in the application
+    const userResult = await usersCollection.updateOne(
+      { email },
+      { $set: { questionnaireToken: token } }
+    );
+
+    if (userResult.matchedCount === 0) {
+      return res.status(404).send({ message: 'Failed to update the user with the questionnaire token' });
+    }
+
+    // Send notification to the adopter via email or other means
+    sendNotification(email, `Complete your questionnaire: ${questionnaireLink}`);
+
+    res.status(200).send({ message: 'Application accepted and questionnaire sent' });
+
+  } catch (error) {
+    console.error('Error processing application:', error);
+    res.status(500).send({ message: 'Internal server error' });
+  }
+});
+
+
     app.delete("/api/adopt/:id", verifyToken, async (req, res) => {
       try {
         const id = req.params.id;
