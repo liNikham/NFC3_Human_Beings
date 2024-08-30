@@ -25,7 +25,7 @@ const Menu = () => {
           to={"/vetDoctor"}
           className="z-50 px-3 py-1 rounded-md whitespace-nowrap"
         >
-          Pet Doctor
+          Vet Doctor
         </NavLink>
         <NavLink
           to={"/donation"}

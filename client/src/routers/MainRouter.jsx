@@ -3,7 +3,6 @@ import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "../components/layouts/MainLayout";
 import Home from "../pages/home/Home";
 import Donation from "../pages/donation/Donation";
-// import PetListing from "../pages/petListing/PetListing";
 import Login from "../pages/login/Login";
 import Registration from "../pages/registration/Registration";
 import Dashboard from "../pages/dashboard/Dashboard";
@@ -13,7 +12,6 @@ import AllUsers from "../pages/dashboard/admin/allUsers/AllUsers";
 import PrivateRoute from "./PrivateRoute";
 import AddPet from "../pages/dashboard/user/addPet/AddPet";
 import AdoptionReq from "../pages/dashboard/user/adoptionReq/AdoptionReq";
-// import MyAddPet from "../pages/dashboard/user/myAddPet/MyAddPet";
 import MyDonationCamp from "../pages/dashboard/user/myDonationCamp/MyDonationCamp";
 import UserHome from "../pages/dashboard/user/userHome/UserHome";
 import UpdatePet from "../pages/dashboard/user/updatePet/UpdatePet";
@@ -36,6 +34,7 @@ import ShelterRegistration from "../components/Shelters/ShelterRegistration";
 import Feedback from "../pages/feedback/Feedback";
 import ApplicationStatus from "../pages/dashboard/user/applicationStatus/ApplicationStatus";
 import Reports from "../pages/Reports/Reports";
+
 const MainRouter = createBrowserRouter([
   {
     path: "/",
@@ -46,7 +45,6 @@ const MainRouter = createBrowserRouter([
         index: true,
         element: <Home />,
       },
-      
       {
         path: "/petlisting",
         element: <PetListNew />,
@@ -126,6 +124,14 @@ const MainRouter = createBrowserRouter([
   },
   {
     path: "/videocall",
+    element: (
+      <PrivateRoute>
+        <VideoCall />
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: "/videocall/:roomId",
     element: (
       <PrivateRoute>
         <VideoCall />

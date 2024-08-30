@@ -7,11 +7,11 @@ import useAdmin from "../../hooks/useAdmin";
 import DashBoardHeader from "../../components/headers/DashBoardHeader";
 import { FaSignOutAlt } from "react-icons/fa";
 import { IoCreate } from "react-icons/io5";
-import { GrUploadOption } from "react-icons/gr";
+import { GrStatusCritical, GrStatusGood, GrStatusInfo, GrUploadOption } from "react-icons/gr";
 import { MdOutlinePets, MdVerifiedUser } from "react-icons/md";
 import { BiSolidDonateHeart } from "react-icons/bi";
 import { FaDonate } from "react-icons/fa";
-import { SiDatadog } from "react-icons/si";
+import { SiDatadog, SiStatuspage } from "react-icons/si";
 import { FaHome } from "react-icons/fa";
 import { GiReceiveMoney } from "react-icons/gi";
 import { GiPayMoney } from "react-icons/gi";
@@ -142,8 +142,8 @@ const Dashboard = () => {
                         to={"adoptStatus"}
                         className="flex gap-2 lg:px-2 lg:py-1 lg:my-1 p-[6px] items-center hover:bg-indigo-200 rounded-lg hover:text-indigo-950"
                       >
-                        <GrUploadOption className="text-xl" />
-                        Adoption Request
+                        <GrStatusInfo className="text-xl" />
+                        Adoption Status
                       </NavLink>
                       <NavLink
                         to={"verifyShelter"}

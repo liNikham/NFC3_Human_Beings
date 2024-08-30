@@ -22,13 +22,7 @@ const DonationCard = ({ data }) => {
               Donation Amount : {data?.amount}
             </p>
             <p className="font-normal text-white mb-3">
-              Maximum Donation Amount : 100$
-            </p>
-            <p className="font-normal text-white mb-3">
               Last Date: {data?.last_date}
-            </p>
-            <p className="font-normal text-white mb-3">
-              Location : {data?.location}
             </p>
             <Link
               to={`/donation/${data._id}`}
