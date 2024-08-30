@@ -34,7 +34,8 @@ import PetAdoptionQuiz from '../components/PetAdoptionQuiz/PetAdoptionQuiz';
 import AdminVerify from "../pages/dashboard/admin/ShelterVerify/ShelterVerify";
 import ShelterRegistration from "../components/Shelters/ShelterRegistration";
 import Feedback from "../pages/feedback/Feedback";
-
+import ApplicationStatus from "../pages/dashboard/user/applicationStatus/ApplicationStatus";
+import Reports from "../pages/Reports/Reports";
 const MainRouter = createBrowserRouter([
   {
     path: "/",
