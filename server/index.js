@@ -61,6 +61,7 @@ async function run() {
     const donatesCollection = petadopyDB.collection("donatesCollection");
     const petcategories = petadopyDB.collection("petcategories");
     const shelterCollection = petadopyDB.collection("shelterCollection");
+    const feedbackCollection = petadopyDB.collection('feedback');
 
 
     app.post("/jwt", async (req, res) => {
@@ -818,6 +819,50 @@ app.patch('/api/adopt/:id', async (req, res) => {
         });
       }
     });
+
+    app.post("/api/feedback", async (req, res) => {
+      try {
+        const feedback = req.body;
+        const result = await feedbackCollection.insertOne(feedback);
+        res.send(result);
+      } catch (error) {
+        console.log(error);
+      }
+    });
+
+    app.get("/api/feedback", async (req, res) => {
+      try {
+        const result = await feedbackCollection.find().toArray();
+        res.send(result);
+      } catch (error) {
+        console.log(error);
+      }
+    });
+
+
+    app.get("/api/petCount/:category", async (req, res) => {
+      try {
+        const category = req.params.category;
+        const query = { category: category };
+        const result = await petlists.countDocuments(query);
+        res.send({ result });
+      } catch (error) {
+        console.log(error);
+      }
+    });
+
+    app.get("/api/petCount/:category/:location", async (req, res) => {
+      try {
+        const category = req.params.category;
+        const location = req.params.location;
+        const query = { category: category, location: location };
+        const result = await petlists.countDocuments(query);
+        res.send({ result });
+      } catch (error) {
+        console.log(error);
+      }
+    });
+
     app.delete("/api/mydonation/:id", async (req, res) => {
       try {
         const id = req.params.id;

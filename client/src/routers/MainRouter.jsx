@@ -34,7 +34,6 @@ import PetAdoptionQuiz from '../components/PetAdoptionQuiz/PetAdoptionQuiz';
 import AdminVerify from "../pages/dashboard/admin/ShelterVerify/ShelterVerify";
 import ShelterRegistration from "../components/Shelters/ShelterRegistration";
 import Feedback from "../pages/feedback/Feedback";
-import ApplicationStatus from "../pages/dashboard/user/applicationStatus/ApplicationStatus";
 
 const MainRouter = createBrowserRouter([
   {
@@ -261,6 +260,14 @@ const MainRouter = createBrowserRouter([
         element: (
           <PrivateRoute>
             <MyDonationCamp />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "Reports",
+        element: (
+          <PrivateRoute>
+            <Reports />
           </PrivateRoute>
         ),
       },
