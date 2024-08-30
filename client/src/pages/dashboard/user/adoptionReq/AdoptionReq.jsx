@@ -107,7 +107,7 @@ const AdoptionReq = () => {
       }
     });
   };
-  const handleAccept = (id) => {
+  const handleAccept = (id, email) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -115,29 +115,37 @@ const AdoptionReq = () => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, accept it!", // Corrected parameter name
+      confirmButtonText: "Yes, accept it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axiosPrivate.patch(`/api/adopt/${id}`).then((res) => {
+        console.log(email , "application adoption")
+        axiosPrivate.patch(`/api/adopt/${id}`, { email }).then((res) => {
           console.log(res);
-          if (res.data.modifiedCount > 0) {
-            refetch();
+          if (res.data.message === 'Application accepted and questionnaire sent') {
+            refetch(); // Refetch adoption requests to reflect updated status
             Swal.fire({
               title: "Accepted!",
-              text: "Request Accepted.",
+              text: "Request Accepted and questionnaire sent.",
               icon: "success",
             });
           }
+        }).catch(error => {
+          Swal.fire({
+            title: "Error",
+            text: "Something went wrong. Please try again.",
+            icon: "error",
+          });
         });
       } else if (result.dismiss === "cancel") {
         Swal.fire({
           title: "Cancelled",
-          text: "request is safe!",
+          text: "Request is safe!",
           icon: "info",
         });
       }
     });
   };
+  
   // console.log(adopRequest);
   return (
     <div>
@@ -177,7 +185,7 @@ const AdoptionReq = () => {
                             <td className="p-4">{dd.user_address}</td>
                             <td className="p-4">
                               <button
-                                onClick={() => handleAccept(dd._id)}
+                                onClick={() => handleAccept(dd._id,dd.user_email)}
                                 className="bg-emerald-700 px-3 py-1 rounded-md text-white"
                               >
                                 Accept

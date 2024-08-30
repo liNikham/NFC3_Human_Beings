@@ -138,6 +138,13 @@ const Dashboard = () => {
                         Adoption Request
                       </NavLink>
                       <NavLink
+                        to={"adoptStatus"}
+                        className="flex gap-2 lg:px-2 lg:py-1 lg:my-1 p-[6px] items-center hover:bg-indigo-200 rounded-lg hover:text-indigo-950"
+                      >
+                        <GrUploadOption className="text-xl" />
+                        Adoption Request
+                      </NavLink>
+                      <NavLink
                         to={"verifyShelter"}
                         className="flex gap-2 lg:px-2 lg:py-1 lg:my-1 p-[6px] items-center hover:bg-indigo-200 rounded-lg hover:text-indigo-950"
                       >

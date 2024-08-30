@@ -45,6 +45,7 @@ const PetDetails = () => {
     petId: user.petId || "",  // Ensure defaults are in place
     userId: user.userId || "",
     email: data.email || "",
+    status: "pending",
     user_name: user.displayName || "",
     user_email: user.email || "",
     user_number: "",

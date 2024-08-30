@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React from "react";
 import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "../components/layouts/MainLayout";
@@ -15,7 +14,6 @@ import PrivateRoute from "./PrivateRoute";
 import AddPet from "../pages/dashboard/user/addPet/AddPet";
 import AdoptionReq from "../pages/dashboard/user/adoptionReq/AdoptionReq";
 // import MyAddPet from "../pages/dashboard/user/myAddPet/MyAddPet";
-// import MyDonation from "../pages/dashboard/user/myDonation/MyDonation";
 import MyDonationCamp from "../pages/dashboard/user/myDonationCamp/MyDonationCamp";
 import UserHome from "../pages/dashboard/user/userHome/UserHome";
 import UpdatePet from "../pages/dashboard/user/updatePet/UpdatePet";
@@ -31,41 +29,41 @@ import VetDoctor from "../pages/vetDoctor/VetDoctor";
 import MyAddPetList from "../pages/dashboard/user/myAddPet/MyAddPetList";
 import MyAddPetUpdate from "../pages/dashboard/user/myAddPet/MyAddPetUpdate";
 import Blog from "../pages/blog/Blog";
-import VideoCall from "../components/VideoCall/VideoCall"
-import Quiz from '../components/PetAdoptionQuiz/PetAdoptionQuiz'
+import VideoCall from "../components/VideoCall/VideoCall";
+import PetAdoptionQuiz from '../components/PetAdoptionQuiz/PetAdoptionQuiz';
 import AdminVerify from "../pages/dashboard/admin/ShelterVerify/ShelterVerify";
 import ShelterRegistration from "../components/Shelters/ShelterRegistration";
 import Feedback from "../pages/feedback/Feedback";
+import ApplicationStatus from "../pages/dashboard/user/applicationStatus/ApplicationStatus";
 
 const MainRouter = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
-    errorElement: <ErrorPage></ErrorPage>,
+    errorElement: <ErrorPage />,
     children: [
       {
         index: true,
-        element: <Home></Home>,
+        element: <Home />,
       },
+      
       {
         path: "/petlisting",
-        // element: <PetListing></PetListing>,
-        element: <PetListNew></PetListNew>,
+        element: <PetListNew />,
       },
       {
         path: "/petlisting/:id",
         element: (
           <PrivateRoute>
-            <PetDetails></PetDetails>
+            <PetDetails />
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          // fetch(`https://petadopy-backend.vercel.app/api/petList/${params.id}`),
           fetch(`http://localhost:5000/api/petList/${params.id}`),
       },
       {
         path: "/donation",
-        element: <Donation></Donation>,
+        element: <Donation />,
       },
       {
         path: "/vetDoctor",
@@ -75,15 +73,12 @@ const MainRouter = createBrowserRouter([
         path: "/donation/:id",
         element: (
           <PrivateRoute>
-            <DonationDetails></DonationDetails>,
+            <DonationDetails />
           </PrivateRoute>
         ),
         loader: async ({ params }) => {
           try {
-            const response = await fetch(
-              // `https://petadopy-backend.vercel.app/api/allDonationCamp/${params.id}`
-              `http://localhost:5000/api/allDonationCamp/${params.id}`
-            );
+            const response = await fetch(`http://localhost:5000/api/allDonationCamp/${params.id}`);
             const data = await response.json();
             return data;
           } catch (error) {
@@ -95,41 +90,53 @@ const MainRouter = createBrowserRouter([
         path: "/feedback",
         element: (
           <PrivateRoute>
-            <Feedback></Feedback>
+            <Feedback />
           </PrivateRoute>
         )
-      }
+      },
+      {
+        path: "/quiz",
+        element: (
+          <PrivateRoute>
+            <PetAdoptionQuiz />
+          </PrivateRoute>
+        ),
+      },
     ],
   },
   {
     path: "/login",
-    element: <Login></Login>,
+    element: <Login />,
   },
   {
     path: "/registration",
-    element: <Registration></Registration>,
+    element: <Registration />,
   },
   {
     path: "/shelter-registration",
     element: <ShelterRegistration />,
   },
   {
-    path: "/quiz",
-    element: <PrivateRoute><Quiz /></PrivateRoute>,
-  },
-  {
     path: "/blog",
-    element: <PrivateRoute><Blog /></PrivateRoute>,
+    element: (
+      <PrivateRoute>
+        <Blog />
+      </PrivateRoute>
+    ),
   },
   {
     path: "/videocall",
-    element: <PrivateRoute><VideoCall /></PrivateRoute>,
+    element: (
+      <PrivateRoute>
+        <VideoCall />
+      </PrivateRoute>
+    ),
   },
   {
     path: "/dashboard",
     element: (
       <PrivateRoute>
-        <Dashboard />,
+        <Dashboard />
       </PrivateRoute>
     ),
     children: [
@@ -138,7 +145,7 @@ const MainRouter = createBrowserRouter([
         path: "allUsers",
         element: (
           <AdminRoute>
-            <AllUsers></AllUsers>,
+            <AllUsers />
           </AdminRoute>
         ),
       },
@@ -146,7 +153,7 @@ const MainRouter = createBrowserRouter([
         path: "allPets",
         element: (
           <AdminRoute>
-            <AllPets></AllPets>,
+            <AllPets />
           </AdminRoute>
         ),
       },
@@ -154,18 +161,17 @@ const MainRouter = createBrowserRouter([
         path: "allDonations",
         element: (
           <AdminRoute>
-            <AllDonation></AllDonation>,
+            <AllDonation />
           </AdminRoute>
         ),
       },
 
-      //User Route
+      // User Route
       {
         path: "userHome",
-        // index: true,
         element: (
           <PrivateRoute>
-            <UserHome></UserHome>,
+            <UserHome />
           </PrivateRoute>
         ),
       },
@@ -173,7 +179,7 @@ const MainRouter = createBrowserRouter([
         path: "addPet",
         element: (
           <PrivateRoute>
-            <AddPet></AddPet>,
+            <AddPet />
           </PrivateRoute>
         ),
       },
@@ -187,13 +193,13 @@ const MainRouter = createBrowserRouter([
       },
       {
         path: "myDonation",
-        element: <MyDonation></MyDonation>,
+        element: <MyDonation />,
       },
       {
         path: "CreateDonation",
         element: (
           <PrivateRoute>
-            <CreateDonation></CreateDonation>,
+            <CreateDonation />
           </PrivateRoute>
         ),
       },
@@ -205,10 +211,7 @@ const MainRouter = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: async ({ params }) => {
-          const Data = await fetch(
-            // `https://petadopy-backend.vercel.app/api/myAddPet/${params.id}`
-            `http://localhost:5000/api/petList/${params.id}`
-          );
+          const Data = await fetch(`http://localhost:5000/api/petList/${params.id}`);
           return Data;
         },
       },
@@ -216,7 +219,15 @@ const MainRouter = createBrowserRouter([
         path: "adoptionReq",
         element: (
           <PrivateRoute>
-            <AdoptionReq></AdoptionReq>,
+            <AdoptionReq />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "adoptStatus",
+        element: (
+          <PrivateRoute>
+            <ApplicationStatus />
           </PrivateRoute>
         ),
       },
@@ -224,25 +235,20 @@ const MainRouter = createBrowserRouter([
         path: "myAddPet",
         element: (
           <PrivateRoute>
-            {/* <MyAddPet></MyAddPet>, */}
             <MyAddPetList />
           </PrivateRoute>
         ),
       },
-
       {
         path: "updateDonation/:id",
         element: (
           <PrivateRoute>
-            <UpdateDonation></UpdateDonation>,
+            <UpdateDonation />
           </PrivateRoute>
         ),
         loader: async ({ params }) => {
           try {
-            const response = await fetch(
-              // `https://petadopy-backend.vercel.app/api/allDonationCamp/${params.id}`
-              `http://localhost:5000/api/allDonationCamp/${params.id}`
-            );
+            const response = await fetch(`http://localhost:5000/api/allDonationCamp/${params.id}`);
             const data = await response.json();
             return data;
           } catch (error) {
@@ -254,7 +260,7 @@ const MainRouter = createBrowserRouter([
         path: "myDonationCamp",
         element: (
           <PrivateRoute>
-            <MyDonationCamp></MyDonationCamp>
+            <MyDonationCamp />
           </PrivateRoute>
         ),
       },
