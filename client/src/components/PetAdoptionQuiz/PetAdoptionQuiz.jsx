@@ -33,7 +33,7 @@ const PetAdoptionQuiz = () => {
   };
 
   const handleSubmit = () => {
-    axios.post('/api/submit-responses', { responses, token })
+    axios.post('http://localhost:5000/api/submit-responses', { responses, token })
       .then(response => alert('Responses submitted successfully.'))
       .catch(error => console.error('Error submitting responses:', error));
   };

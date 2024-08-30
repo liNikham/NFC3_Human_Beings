@@ -8,7 +8,7 @@ const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const jwt = require("jsonwebtoken");
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const port = process.env.PORT || 5000;
-const Question = require("./src/models/questions");
+// const Question = require("./src/models/questions");
 const crypto = require('crypto');
 
 function generateUniqueToken() {
@@ -62,6 +62,7 @@ async function run() {
     const petcategories = petadopyDB.collection("petcategories");
     const shelterCollection = petadopyDB.collection("shelterCollection");
     const feedbackCollection = petadopyDB.collection('feedback');
+    const question = petadopyDB.collection('Question');
 
 
     app.post("/jwt", async (req, res) => {
@@ -383,8 +384,9 @@ async function run() {
     app.get('/api/questionnaire', async (req, res) => {
       try {
         const token = req.query.token;
+        console.log(token);
         // Verify the token if needed
-        const questions = await Question.find();
+        const questions = await question.find().toArray();
         console.log(questions);
         res.status(200).json(questions);
       } catch (error) {
@@ -396,8 +398,9 @@ async function run() {
     app.post('/api/submit-responses', async (req, res) => {
       try {
         const { responses, token } = req.body;
+        console.log(responses, token);
         // Verify the token if needed
-        const questions = await Question.find();
+        const questions = await question.find().toArray();
         let result = true;
     
         questions.forEach(question => {
@@ -407,7 +410,15 @@ async function run() {
         });
     
         // Update user status based on result
-        await User.updateOne({ questionnaireToken: token }, { questionnaireStatus: result ? 'Passed' : 'Failed' });
+        
+          const resultres = await usersCollection.updateOne(
+            { questionnaireToken: token },
+            { $set: { questionnaireStatus: result ? 'Passed' : 'Failed' } }
+          );
+        
+          if (resultres.matchedCount === 0) {
+            return res.status(404).json({ error: 'Token not found' });
+          }
     
         res.status(200).json({ message: 'Responses submitted successfully.' });
       } catch (error) {
